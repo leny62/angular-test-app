@@ -1,0 +1,9 @@
+<div>
+  <div class="header">
+    <div (click)="onLogout()"  >logout</div>
+  </div>
+  <div [ngSwitch]="role"  class="container" >
+    <div *ngSwitchCase="'User'" > Hello Standard User </div>
+    <div *ngSwitchCase="'Admin'"  class="bg-red-500" >Hello Admin</div>
+  </div>
+</div>
