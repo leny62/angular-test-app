@@ -1,19 +1,31 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { loginInterface } from './interface';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css'],
 })
-export class LoginComponent {
-  form: loginInterface = {
-    role: '',
-  };
+export class LoginComponent implements OnInit {
+  form: FormGroup = new FormGroup({});
+
   constructor(private route: Router) {}
+
+  ngOnInit(): void {
+    this.form = new FormGroup({
+      role: new FormControl('', [Validators.required]),
+    });
+  }
+
   onSubmit(): void {
-    localStorage.setItem('role', this.form.role);
-    this.route.navigate(['/dashboard']);
+    this.form.get('role')?.markAsTouched();
+    if (this.form.valid) {
+      const role = this.form.value.role;
+      if (role === 'user' || role === 'admin') {
+        localStorage.setItem('role', role)
+        this.route.navigate(['/dashboard']);
+      }
+    }
   }
 }

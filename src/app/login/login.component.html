@@ -1,8 +1,13 @@
-<div >
-  <div >
-    <form (ngSubmit)="onSubmit()">
-      <input type="text" placeholder="role" id="role" name="role" [(ngModel)]="form.role" >
-      <button type="submit">Login</button>
+<div class="container">
+  <div class="row justify-content-center">
+    <form [formGroup]="form" (ngSubmit)="onSubmit()" class="col-6">
+      <div class="form-group">
+        <input type="text" class="form-control" placeholder="role" id="role" formControlName="role" >
+        <div *ngIf="form.get('role')?.invalid && form.get('role')?.touched" class="alert alert-danger">
+          Role is required
+        </div>
+      </div>
+      <button type="submit" class="btn btn-primary" [disabled]="form.invalid">Login</button>
     </form>
   </div>
 </div>
