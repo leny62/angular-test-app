@@ -1,6 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
+import {
+  FormGroup,
+  FormControl,
+  Validators,
+  ValidatorFn,
+  AbstractControl,
+} from '@angular/forms';
 
 @Component({
   selector: 'app-login',
@@ -12,9 +18,19 @@ export class LoginComponent implements OnInit {
 
   constructor(private route: Router) {}
 
+  roleValidator(): ValidatorFn {
+    return (control: AbstractControl): { [key: string]: any } | null => {
+      if (!control.value) {
+        return null;
+      }
+      const forbidden = control.value !== 'user' && control.value !== 'admin';
+      return forbidden ? { forbiddenRole: { value: control.value } } : null;
+    };
+  }
+
   ngOnInit(): void {
     this.form = new FormGroup({
-      role: new FormControl('', [Validators.required]),
+      role: new FormControl('', [Validators.required, this.roleValidator()]),
     });
   }
 
@@ -23,7 +39,7 @@ export class LoginComponent implements OnInit {
     if (this.form.valid) {
       const role = this.form.value.role;
       if (role === 'user' || role === 'admin') {
-        localStorage.setItem('role', role)
+        localStorage.setItem('role', role);
         this.route.navigate(['/dashboard']);
       }
     }

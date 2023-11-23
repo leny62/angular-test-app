@@ -14,9 +14,4 @@ export class UserService {
   setLocalStorage(userRole: string): void {
     localStorage.setItem('role', userRole);
   }
-
-  removeToken(): void {
-    localStorage.removeItem('role');
-    this.router.navigate(['']);
-  }
 }
