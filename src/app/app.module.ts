@@ -9,6 +9,9 @@ import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.compo
 import { LoginComponent } from './login/login.component';
 import { HeaderComponent } from './components/header/header.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { FormComponent } from './form/form.component';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { HttpInterceptorService } from './http-interceptor.service';
 
 @NgModule({
   declarations: [
@@ -16,10 +19,13 @@ import { ReactiveFormsModule } from '@angular/forms';
     LoginComponent,
     DashboardComponent,
     HeaderComponent,
-    AdminDashboardComponent
+    AdminDashboardComponent,
+    FormComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, FormsModule, ReactiveFormsModule],
-  providers: [],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: HttpInterceptorService, multi: true },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

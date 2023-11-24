@@ -1,9 +1,17 @@
 <div>
-  <div class="header">
-    <div (click)="onLogout()"  >logout</div>
-  </div>
-  <div [ngSwitch]="role"  class="container" >
-    <div *ngSwitchCase="'User'" > Hello Standard User </div>
-    <div *ngSwitchCase="'Admin'"  class="bg-red-500" >Hello Admin</div>
+  <app-header></app-header>
+  <div [ngSwitch]="role" class="container mt-5">
+    <div *ngSwitchCase="'User'" class="card bg-light">
+      <div class="card-body">
+        <h5 class="card-title">Welcome!</h5>
+        <p class="card-text">Hello Standard User</p>
+      </div>
+    </div>
+    <div *ngSwitchCase="'Admin'" class="card bg-danger text-white mt-3">
+      <div class="card-body">
+        <h5 class="card-title">Welcome!</h5>
+        <p class="card-text">Hello Admin</p>
+      </div>
+    </div>
   </div>
 </div>

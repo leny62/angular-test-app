@@ -1,17 +1,5 @@
-<div class="container">
-  <div class="row justify-content-center">
-    <form [formGroup]="form" (ngSubmit)="onSubmit()" class="col-6">
-      <div class="form-group">
-        <label for="role">Role</label>
-        <input type="text" class="form-control" placeholder="role" id="role" formControlName="role" >
-        <div *ngIf="form.get('role')?.hasError('required') && form.get('role')?.touched" class="alert alert-danger">
-          Role is required
-        </div>
-        <div *ngIf="form.get('role')?.hasError('forbiddenRole') && form.get('role')?.touched && form.get('role')?.value" class="alert alert-danger">
-          Invalid Role
-        </div>
-      </div>
-      <button type="submit" class="btn btn-primary">Login</button>
-    </form>
+<div class="d-flex justify-content-center align-items-center vh-100">
+  <div>
+    <app-form (submitted)="onSubmit($event)"></app-form>
   </div>
 </div>
