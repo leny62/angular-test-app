@@ -1,8 +1,5 @@
-<div >
-  <div >
-    <form (ngSubmit)="onSubmit()">
-      <input type="text" placeholder="role" id="role" name="role" [(ngModel)]="form.role" >
-      <button type="submit">Login</button>
-    </form>
+<div class="d-flex justify-content-center align-items-center vh-100">
+  <div>
+    <app-form (submitted)="onSubmit($event)"></app-form>
   </div>
 </div>

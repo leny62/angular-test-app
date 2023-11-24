@@ -1,0 +1,43 @@
+<form
+  [formGroup]="loginForm"
+  (ngSubmit)="onSubmit()"
+  class="d-flex align-items-center"
+>
+  <input
+    type="text"
+    placeholder="role"
+    id="role"
+    formControlName="role"
+    (change)="onInputChange()"
+    class="form-control border-primary"
+  />
+  <button
+    type="submit"
+    [disabled]="!loginForm.get('role')?.value"
+    class="btn btn-primary ms-3"
+  >
+    Login
+  </button>
+</form>
+<div
+  *ngIf="
+    submittedOnce &&
+    loginForm.get('role')?.hasError('required') &&
+    loginForm.get('role')?.touched &&
+    loginForm.get('role')?.invalid
+  "
+  class="text-danger"
+>
+  Role is required.
+</div>
+<div
+  *ngIf="
+    submittedOnce &&
+    loginForm.get('role')?.hasError('invalidRole') &&
+    loginForm.get('role')?.touched &&
+    loginForm.get('role')?.invalid
+  "
+  class="text-danger"
+>
+  Please enter either user or admin.
+</div>
