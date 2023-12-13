@@ -14,4 +14,12 @@ export class UserService {
   setLocalStorage(userRole: string): void {
     localStorage.setItem('role', userRole);
   }
+
+  goToMovies(): void {
+    this.router.navigate(['/movies']);
+  }
+
+  goToOneMovie(id: number): void {
+    this.router.navigate(['/movies', id]);
+  }
 }

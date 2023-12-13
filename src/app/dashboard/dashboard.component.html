@@ -1,16 +1,16 @@
-<div>
+<div class="min-h-screen bg-gray-100 py-6 flex flex-col justify-center sm:py-12">
   <app-header></app-header>
-  <div [ngSwitch]="role" class="container mt-5">
-    <div *ngSwitchCase="'User'" class="card bg-light">
-      <div class="card-body">
-        <h5 class="card-title">Welcome!</h5>
-        <p class="card-text">Hello Standard User</p>
+  <div [ngSwitch]="role" class="container mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <div *ngSwitchCase="'User'" class="bg-white overflow-hidden shadow rounded-lg">
+      <div class="px-4 py-5 sm:p-6">
+        <h5 class="text-lg leading-6 font-medium text-gray-900">Welcome!</h5>
+        <p class="mt-2 text-sm text-red-500">Hello Standard User</p>
       </div>
     </div>
-    <div *ngSwitchCase="'Admin'" class="card bg-danger text-white mt-3">
-      <div class="card-body">
-        <h5 class="card-title">Welcome!</h5>
-        <p class="card-text">Hello Admin</p>
+    <div *ngSwitchCase="'Admin'" class="bg-red-600 text-white overflow-hidden shadow rounded-lg mt-4">
+      <div class="px-4 py-5 sm:p-6">
+        <h5 class="text-lg leading-6 font-medium">Welcome!</h5>
+        <p class="mt-2 text-sm text-red-500">Hello Admin</p>
       </div>
     </div>
   </div>
