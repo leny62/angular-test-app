@@ -23,13 +23,13 @@ export class MovieDetailsComponent implements OnInit {
   }
 
   onMovieDetails(movieId: number): void {
-    this.http
-      .fetchMovieDetails(movieId)
-      .then((res: any) => {
+    this.http.fetchMovieDetails(movieId).subscribe(
+      (res: any) => {
         this.movie = res;
         console.log(this.movie);
-      })
-      .catch((err) => console.log(err));
+      },
+      (err: any) => console.log(err)
+    );
   }
 
   getCompanyLogoUrl(logoPath: string): string {

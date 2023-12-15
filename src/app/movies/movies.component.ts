@@ -19,11 +19,12 @@ export class MoviesComponent {
   fetchMovies() {
     this.http
       .fetchData()
-      .then((res: any) => {
-        this.movies = res.results;
-        console.log(this.movies);
-      })
-      .catch((err) => console.log(err));
+      .subscribe(
+        (res: any) => {
+          this.movies = res.results;
+        },
+        (err: any) => console.log(err)
+      )
   }
 
   getImageUrl(posterPath: string): string {

@@ -1,4 +1,6 @@
 import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -6,52 +8,13 @@ import { Injectable } from '@angular/core';
 export class ApiService {
   private baseUrl = 'https://api.themoviedb.org';
 
-  constructor() {}
+  constructor(private http: HttpClient) {}
 
-  async fetchData(): Promise<any> {
-    // Fetch data using the Fetch API.
-    try {
-      const response = await fetch(
-        `${this.baseUrl}/3/trending/movie/day?language=en-US`,
-        {
-          headers: {
-            'content-type': 'application/json',
-            Authorization:
-              'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJmOWI2NjRjNGY2MzRhOTdjMzg3ZTU0NjQ3M2YzMjYyMCIsInN1YiI6IjYzZDAyMTRlOTE3NDViMDA4NWRhMjYxOSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.BKlHvydZBMvwDe9jM2MbguROoebciiXtdQXixMszKYk',
-          },
-        }
-      );
-      if (!response.ok) {
-        throw new Error(`HTTP error! Status: ${response.status}`);
-      }
-      return await response.json();
-    } catch (error) {
-      // Handle errors here.
-      console.error('Fetch API Error:', error);
-      throw error;
-    }
+  fetchData(): Observable<any> {
+    return this.http.get(`${this.baseUrl}/3/trending/movie/day?language=en-US`);
   }
 
-  async fetchMovieDetails(id: number): Promise<any> {
-    try {
-      const response = await fetch(
-        `${this.baseUrl}/3/movie/${id}?language=en-US`,
-        {
-          headers: {
-            'content-type': 'application/json',
-            Authorization:
-              'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJmOWI2NjRjNGY2MzRhOTdjMzg3ZTU0NjQ3M2YzMjYyMCIsInN1YiI6IjYzZDAyMTRlOTE3NDViMDA4NWRhMjYxOSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.BKlHvydZBMvwDe9jM2MbguROoebciiXtdQXixMszKYk',
-          },
-        }
-      );
-      if (!response.ok) {
-        throw new Error(`HTTP error! Status: ${response.status}`);
-      }
-      return await response.json();
-    } catch (error) {
-      // Handle errors here.
-      console.error('Fetch API Error:', error);
-      throw error;
-    }
+  fetchMovieDetails(id: number): Observable<any> {
+    return this.http.get(`${this.baseUrl}/3/movie/${id}?language=en-US`);
   }
 }
