@@ -1,43 +1,47 @@
-<form
-  [formGroup]="loginForm"
-  (ngSubmit)="onSubmit()"
-  class="d-flex align-items-center"
->
-  <input
-    type="text"
-    placeholder="role"
-    id="role"
-    formControlName="role"
-    (change)="onInputChange()"
-    class="form-control border-primary"
-  />
-  <button
-    type="submit"
-    [disabled]="!loginForm.get('role')?.value"
-    class="btn btn-primary ms-3"
+<div class="flex items-center justify-center h-screen">
+  <form
+    [formGroup]="loginForm"
+    (ngSubmit)="onSubmit()"
+    class="flex flex-col items-center space-y-3 animate-pulse"
   >
-    Login
-  </button>
-</form>
-<div
-  *ngIf="
-    submittedOnce &&
-    loginForm.get('role')?.hasError('required') &&
-    loginForm.get('role')?.touched &&
-    loginForm.get('role')?.invalid
-  "
-  class="text-danger"
->
-  Role is required.
-</div>
-<div
-  *ngIf="
-    submittedOnce &&
-    loginForm.get('role')?.hasError('invalidRole') &&
-    loginForm.get('role')?.touched &&
-    loginForm.get('role')?.invalid
-  "
-  class="text-danger"
->
-  Please enter either user or admin.
+    <div class="flex items-center w-500">
+      <input
+        type="text"
+        placeholder="role"
+        id="role"
+        formControlName="role"
+        (change)="onInputChange()"
+        class="shadow appearance-none border rounded-l py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline flex-grow"
+      />
+      <button
+        type="submit"
+        [disabled]="!loginForm.get('role')?.value"
+        class="bg-blue-500 hover:bg-blue-700 text-black font-bold py-2 px-4 rounded-r focus:outline-none focus:shadow-outline"
+      >
+        Login
+      </button>
+    </div>
+    <div
+      *ngIf="
+        submittedOnce &&
+        loginForm.get('role')?.hasError('required') &&
+        loginForm.get('role')?.touched &&
+        loginForm.get('role')?.invalid
+      "
+      class="text-red-600 w-500 text-center"
+    >
+      Role is required.
+    </div>
+    <div
+      *ngIf="
+        submittedOnce &&
+        loginForm.get('role')?.hasError('invalidRole') &&
+        loginForm.get('role')?.touched &&
+        loginForm.get('role')?.invalid
+      "
+      class="text-red-600 w-500 text-center"
+    >
+      Please enter either user or admin.
+    </div>
+  </form>
 </div>

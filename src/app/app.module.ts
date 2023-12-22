@@ -10,8 +10,13 @@ import { LoginComponent } from './login/login.component';
 import { HeaderComponent } from './components/header/header.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { FormComponent } from './form/form.component';
-import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { HttpInterceptorService } from './http-interceptor.service';
+import { SignupComponent } from './signup/signup.component';
+import { SignupFormComponent } from './signup-form/signup-form.component';
+import { MoviesComponent } from './movies/movies.component';
+import { MovieDetailsComponent } from './movie-details/movie-details.component';
+import { AuthInterceptor } from './interceptors/auth.interceptor';
 
 @NgModule({
   declarations: [
@@ -21,10 +26,14 @@ import { HttpInterceptorService } from './http-interceptor.service';
     HeaderComponent,
     AdminDashboardComponent,
     FormComponent,
+    SignupComponent,
+    SignupFormComponent,
+    MoviesComponent,
+    MovieDetailsComponent,
   ],
-  imports: [BrowserModule, AppRoutingModule, FormsModule, ReactiveFormsModule],
+  imports: [BrowserModule, AppRoutingModule, FormsModule, ReactiveFormsModule, HttpClientModule],
   providers: [
-    { provide: HTTP_INTERCEPTORS, useClass: HttpInterceptorService, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
   ],
   bootstrap: [AppComponent],
 })

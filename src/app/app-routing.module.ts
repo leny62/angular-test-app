@@ -5,6 +5,9 @@ import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.compo
 import { AuthGuard } from './guards/auth.guards';
 import { AdminGuard } from './guards/admin.guard';
 import { LoginComponent } from './login/login.component';
+import { SignupComponent } from './signup/signup.component';
+import { MoviesComponent } from './movies/movies.component';
+import { MovieDetailsComponent } from './movie-details/movie-details.component';
 
 const routes: Routes = [
   {
@@ -13,6 +16,9 @@ const routes: Routes = [
     canActivate: [AuthGuard],
   },
   { path: '', component: LoginComponent },
+  { path: 'signup', component: SignupComponent},
+  { path: 'movies', component: MoviesComponent, canActivate: [AuthGuard]},
+  { path: 'movies/:id', component: MovieDetailsComponent, canActivate: [AuthGuard]}
 ];
 
 @NgModule({
